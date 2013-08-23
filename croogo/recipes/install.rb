@@ -9,4 +9,10 @@ node[:deploy].each do |application, deploy|
 	user 'ubuntu'
 	command "chmod 777 -R #{deploy[:deploy_to]}/current/app/tmp"
   end
+  
+  execute 'write permission to Config folder' do
+	action :run
+	user 'ubuntu'
+	command "chmod 777 #{deploy[:deploy_to]}/current/app/Config"
+  end
 end
