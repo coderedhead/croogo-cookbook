@@ -15,4 +15,26 @@ node[:deploy].each do |application, deploy|
 	user 'root'
 	command "chmod 777 #{deploy[:deploy_to]}/current/app/Config"
   end
+  
+  template "#{deploy[:deploy_to]}/current/app/Config/database.php" do
+	source "database.php.erb"
+	mode 0755
+	owner "www-data"
+	group "www-data"
+  end
+
+  template "#{deploy[:deploy_to]}/current/app/Config/croogo.php" do
+	source "croogo.php.erb"
+	mode 0755
+	owner "www-data"
+	group "www-data"
+  end
+
+  template "#{deploy[:deploy_to]}/current/app/Config/settings.json" do
+	source "settings.json.erb"
+	mode 0777
+	owner "www-data"
+	group "www-data"
+  end
+  
 end
